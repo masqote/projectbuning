@@ -21,6 +21,9 @@
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+    <!-- Upload File -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -262,7 +265,7 @@
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                            <li><a href="/profile"><i class=" fa fa-suitcase"></i>Profile</a></li>
                             <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                             <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
                             <li><a href="/logout"><i class="fa fa-key"></i> Log Out</a></li>
@@ -339,6 +342,10 @@
     <script src="js/sparkline-chart.js"></script>
     <script src="js/easy-pie-chart.js"></script>
     <script src="js/count.js"></script>
+
+
+  <!-- upload File profile -->
+  <script type="text/javascript" src="assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
 
   <script>
 

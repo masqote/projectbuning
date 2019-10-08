@@ -3,15 +3,72 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use DB;
 
 class DashboardController extends Controller
 {
-    public function login()
+    //menampilkan template dashboard
+    public function dashboard()
     {
-        return view('login');
+        if(!Session::get('login')){
+            return redirect('login')->with('alert','Kamu harus login dulu');
+        }
+        else{
+            return view('dashboard');
+        }
     }
-    public function index()
+
+    //Menampilkan template profile
+    public function profile()
     {
-        return view('welcome');
+        if(!Session::get('login')){
+            return redirect('login')->with('alert','Kamu harus login dulu');
+        }else{
+            $email = session()->get('email'); // mengambil session email
+            $profile = DB::table('users')->where('email', $email)->first(); // melakukan check ke database dimana email = $email (session)
+            return view('profile', compact('profile'));
+        }
+    }
+
+    //Update data untuk Edit Profile
+    public function profileUpdate(Request $request)
+    {
+        $email = session()->get('email'); // mengambil session email
+        $data = User::where('email',$email)->first(); // Melakukan check pada table USER where email = $email
+        $data->name = $request->name; // mengambil value dari form name pada blade template
+        $data->email = $request->email; // mengambil value dari form email pada blade template
+        if ($request->name && $request->email != null) { // melakukan check pada form, jika nama dan email menjadi kosong, maka dia akan gagal, dan jika tidak kosong maka berhasil
+            $data->save();
+            return redirect('/profile')->with('alert-success','Data berhasil diubah!'); // jika berhasil mengembalikan kedalam halaman profile dan membawa session alert-success
+        }else{
+            return redirect('/profile')->with('gagal','Data tidak dapat diubah!'); // jika berhasil mengembalikan kedalam halaman profile dan membawa session gagal
+        }
+        
+       
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $email = session()->get('email'); // mengambil session email
+        $data = User::where('email',$email)->first();
+        $validatedData = $request->validate([
+            'current_password' => 'required|min:4',
+            'new_password' => 'required',
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+        $check = Hash::check($request->current_password, $data->password);
+        
+        if ($check == true) {
+            $data->password = bcrypt($request->new_password);
+            $data->save();
+            Session::flush();
+            return redirect('/login')->with('alert-success','Password berhasil diubah!');
+        }else{
+            return redirect('/profile')->with('gagal','Password tidak berhasil diubah!');
+        }
+        
     }
 }

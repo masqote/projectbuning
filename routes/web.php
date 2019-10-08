@@ -16,14 +16,15 @@
 // });
 
 //UserController
-Route::get('/', 'UserController@index');
-Route::get('/login', 'UserController@login');
-Route::get('/register', 'UserController@register');
-Route::post('/loginPost', 'UserController@loginPost');
-Route::get('/register', 'UserController@register');
-Route::post('/registerPost', 'UserController@registerPost');
-Route::get('/logout', 'UserController@logout');
+Route::get('/', 'UserController@index'); // Dashboard
+Route::get('/login', 'UserController@login'); // Template Login
+Route::get('/register', 'UserController@register'); // Template Register
+Route::post('/loginPost', 'UserController@loginPost'); // Handle Post Request from Login
+Route::post('/registerPost', 'UserController@registerPost'); // Handle Post Request from Register
+Route::get('/logout', 'UserController@logout'); // Logout Session
 
 // DashboardController
-// Route::get('/', 'UserController@index');
+Route::get('/profile', 'DashboardController@profile'); // Check Profile User
+Route::post('/profileUpdate', 'DashboardController@profileUpdate'); // Update Profile User
+Route::post('/resetPassword', 'DashboardController@resetPassword'); // Update Profile User
 
