@@ -15,6 +15,9 @@
 //     return view('layouts.template');
 // });
 
+// Template Master
+Route::get('/layouts/template', 'DashboardController@index');
+
 //UserController
 Route::get('/', 'UserController@index'); // Dashboard
 Route::get('/login', 'UserController@login'); // Template Login

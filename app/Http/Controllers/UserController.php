@@ -34,6 +34,7 @@ class UserController extends Controller
                 Session::put('name',$data->name);
                 Session::put('email',$data->email);
                 Session::put('role',$data->role);
+                Session::put('file',$data->file);
                 Session::put('login',TRUE);
                 return redirect('/');
             }
@@ -52,7 +53,13 @@ class UserController extends Controller
     }
 
     public function register(Request $request){
-        return view('register');
+        $role = session()->get('role');
+        if ($role == 1) {
+            return view('register');
+        }else{
+            return redirect('login')->with('alert','You should login first');
+        }
+       
     }
 
     public function registerPost(Request $request){

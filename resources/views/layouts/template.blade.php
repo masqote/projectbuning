@@ -259,7 +259,10 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="img/avatar1_small.jpg">
+                        @if(Session::get('file') == null)
+                        <img alt="" src="img/avatar1_small.jpg">
+                        @endif
+                            <img alt="" style="height:29px; width:29px;" src="foto/{{Session::get('file')}}">
                             <span class="username">{{Session::get('name')}}</span>
                             <b class="caret"></b>
                         </a>

@@ -27,7 +27,10 @@
                         @endif
                           <div class="user-heading round">
                               <a href="#">
-                                  <img src="img/profile-avatar.jpg" alt="">
+                              @if($profile->file == null)
+                              <img src="img/profile-avatar.jpg" alt="">
+                              @endif
+                                  <img src="foto/{{$profile->file}}" alt="">
                               </a>
                               <!-- <p style="margin-top:-10px;"><span style="color:black; opacity:1;  text-shadow: 0 0 3px white;">Change Photo</span></p> -->
                               <!-- <form action="/uploadPost" method="POST" enctype="multipart/form-data">
@@ -80,7 +83,7 @@
                                           </div>
                                           <div class="modal-body">
 
-                                              <form role="form" action="/profileUpdate" method="post">
+                                              <form role="form" action="/profileUpdate" method="post" enctype="multipart/form-data">
                                               {{ csrf_field() }}
                                                   <div class="form-group">
                                                       <label for="exampleInputEmail1">Your Name</label>
@@ -91,15 +94,29 @@
                                                       <input type="email" class="form-control" name="email" id="exampleInputPassword3" value="{{$profile->email}}" style="color:black;">
                                                   </div>
                                                   <div class="form-group">
-                                                      <label for="exampleInputFile">File input</label>
-                                                      <input type="file" id="exampleInputFile3">
-                                                      <p class="help-block">Example block-level help text here.</p>
+                                                  <label>Profile Picture</label>
+                                                    <br/>
+                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                            @if($profile->file == null)
+                                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                                            @endif
+                                                                <img src="foto/{{$profile->file}}" alt="" /> 
+                                                            </div>
+                                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                            <div>
+                                                            <span class="btn btn-white btn-file">
+                                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+                                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                                            <input type="file" name="file" class="default" value="{{$profile->file}}"/>
+                                                            </span>
+                                                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                   
                                                   </div>
-                                                  <div class="checkbox">
-                                                      <label>
-                                                          <input type="checkbox"> Check me out
-                                                      </label>
-                                                  </div>
+                                                  
                                                   <button type="submit" class="btn btn-primary">Update</button>
                                               </form>
                                           </div>
