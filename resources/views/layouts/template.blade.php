@@ -18,12 +18,19 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <!-- Date Range -->
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
     <!-- Upload File -->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-fileupload/bootstrap-fileupload.css" />
-
+    <!-- Datatable -->
+    <link href="assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+    <link href="assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/data-tables/DT_bootstrap.css" />
+    
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -41,7 +48,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo">Flat<span>lab</span></a>
+            <a href="/" class="logo"><img alt="avatar" style="height:40px; margin-top:-10px;" src="https://longhi-group.com/wp-content/uploads/2018/02/LG-right.png"></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -291,6 +298,12 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
+                  <li>
+                      <a href="/project">
+                          <i class="fa fa-fighter-jet"></i>
+                          <span>Project</span>
+                      </a>
+                  </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -346,6 +359,15 @@
     <script src="js/easy-pie-chart.js"></script>
     <script src="js/count.js"></script>
 
+    <!-- Data Table -->
+    <!-- <script type="text/javascript" language="javascript" src="assets/advanced-datatable/media/js/jquery.js"></script> -->
+    <script type="text/javascript" language="javascript" src="assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+
+    <!-- Date Range -->
+  <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="assets/bootstrap-daterangepicker/moment.min.js"></script>
+  <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 
   <!-- upload File profile -->
   <script type="text/javascript" src="assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>

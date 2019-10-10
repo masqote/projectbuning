@@ -27,6 +27,16 @@ class DashboardController extends Controller
         }
     }
 
+    public function project()
+    {
+        if(!Session::get('login')){
+            return redirect('login')->with('alert','Kamu harus login dulu');
+        }
+        else{
+            return view('project');
+        }
+    }
+
     //Menampilkan template profile
     public function profile()
     {

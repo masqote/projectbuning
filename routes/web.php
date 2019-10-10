@@ -28,6 +28,7 @@ Route::get('/logout', 'UserController@logout'); // Logout Session
 
 // DashboardController
 Route::get('/profile', 'DashboardController@profile'); // Check Profile User
+Route::get('/project', 'DashboardController@project'); // Check Profile User
 Route::post('/profileUpdate', 'DashboardController@profileUpdate'); // Update Profile User
 Route::post('/resetPassword', 'DashboardController@resetPassword'); // Update Profile User
 
