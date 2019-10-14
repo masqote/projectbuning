@@ -1,6 +1,9 @@
 @extends('layouts.template')
 @section('content')
 <!--main content start-->
+<style>
+
+</style>
 <section id="main-content">
           <section class="wrapper site-min-height">
               <!-- page start-->
@@ -8,6 +11,11 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
+                          @if(\Session::has('alert-success'))
+                                <div class="alert alert-success">
+                                    <div>{{Session::get('alert-success')}}</div>
+                                </div>
+                            @endif
                               Data Project
                               <button type="submit" style="position:absolute; right:30px; top:1px; width:200px; font-size:20px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Project</button>
                           </header>
@@ -16,28 +24,35 @@
                                     <table  class="display table table-bordered table-striped" id="example">
                                       <thead>
                                       <tr>
-                                          <th>Rendering engine</th>
-                                          <th>Browser</th>
-                                          <th>Platform(s)</th>
+                                          <th>No</th>
+                                          <th>Responsible</th>
+                                          <th>Project Name</th>
+                                          <th>Periode</th>
                                           <th class="hidden-phone">Engine version</th>
                                           <th class="hidden-phone">CSS grade</th>
                                       </tr>
                                       </thead>
                                       <tbody>
+                                      @php
+                                        $no = 1;
+                                      @endphp
+                                      @foreach($project as $row)
                                       <tr class="gradeX">
-                                          <td>Trident</td>
-                                          <td>Internet
-                                              Explorer 4.0</td>
-                                          <td>Win 95+</td>
+                                          <td>{{$no++}}</td>
+                                          <td>{{$row->email_project}}</td>
+                                          <td>{{$row->name_of_project}}</td>
+                                          <td>{{  date('Y - M', strtotime($row->month_of_project)) }}</td>
                                           <td class="center hidden-phone">4</td>
                                           <td class="center hidden-phone">X</td>
                                       </tr>
+                                      @endforeach
                                       </tbody>
                                       <tfoot>
                                       <tr>
-                                          <th>Rendering engine</th>
-                                          <th>Browser</th>
-                                          <th>Platform(s)</th>
+                                          <th>No</th>
+                                          <th>Responsible</th>
+                                          <th>Project Name</th>
+                                          <th>Periode</th>
                                           <th class="hidden-phone">Engine version</th>
                                           <th class="hidden-phone">CSS grade</th>
                                       </tr>
@@ -62,16 +77,17 @@
                                           </div>
                                           <div class="modal-body">
 
-                                          <form>
+                                          <form action="/projectPost" method="post">
+                                          {{ csrf_field() }}
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6">
                                                         <label for="inputEmail4">Project Name</label>
-                                                        <input type="text" class="form-control" id="inputEmail4" placeholder="Project Name">
+                                                        <input type="text" class="form-control" name="name_of_project" id="inputEmail4" placeholder="Project Name" style="color:black;" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                     <label for="inputPassword4">Periode</label>
-                                                        <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/yyyy" data-date="102/2012"  class="input-append date dpMonths">
-                                                            <input type="text"  size="16" class="form-control">
+                                                        <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/dd/yyyy" data-date="now()"  class="input-append date dpMonths">
+                                                            <input type="text" name="month_of_project" size="16"   style="color:black;" required class="form-control">
                                                                 <span class="input-group-btn add-on">
                                                                     <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
                                                                 </span>
@@ -82,20 +98,20 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-3">
                                                         <label for="inputEmail4">Destination</label>
-                                                        <input type="text" class="form-control" id="inputEmail4" placeholder="Destination" autocomplete="off">
+                                                        <input type="text" class="form-control"  style="color:black;" required name="destination_project[]" id="inputEmail4" placeholder="Destination" autocomplete="off">
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Schedule</label>
                                                         <div class="input-group input-large" data-date="13/07/2013" data-date-format="mm/dd/yyyy" >
-                                                            <input type="text" class="form-control dpd1" name="from" autocomplete="off">
+                                                            <input type="text" class="form-control dpd1"  style="color:black;" required name="start_date_project[]" autocomplete="off">
                                                             <span class="input-group-addon">To</span>
-                                                            <input type="text" class="form-control dpd2" name="to"  autocomplete="off">
+                                                            <input type="text" class="form-control dpd2"  style="color:black;" required name="end_date_project[]"  autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Remarks</label>
                                                         <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Project Name"> -->
-                                                        <textarea class="form-control" autocomplete="off" name="remarks"></textarea>
+                                                        <textarea class="form-control" autocomplete="off"  style="color:black;" required name="remarks_project[]"></textarea>
                                                     </div>
                                                     <div class="form-group col-md-1">
                                                         <label for="inputEmail4">Project</label>
@@ -123,23 +139,23 @@
       <script>
        $("#somebutton").click(function () {
         $("#add_field").append(`
-                                             <div class="form-row">
+                                                <div class="form-row">
                                                     <div class="form-group col-md-3">
                                                         <label for="inputEmail4">Destination</label>
-                                                        <input type="text" class="form-control" id="inputEmail4" placeholder="Destination" autocomplete="off">
+                                                        <input type="text" class="form-control" name="destination_project[]"  style="color:black;" required id="inputEmail4" placeholder="Destination" autocomplete="off">
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Schedule</label>
                                                         <div class="input-group input-large" data-date="13/07/2013" data-date-format="mm/dd/yyyy" >
-                                                            <input type="text" class="form-control dpd1" name="from" autocomplete="off">
+                                                            <input type="text"  style="color:black;" required class="form-control dpd1" name="start_date_project[]" autocomplete="off">
                                                             <span class="input-group-addon">To</span>
-                                                            <input type="text" class="form-control dpd2" name="to"  autocomplete="off">
+                                                            <input type="text"  style="color:black;" required class="form-control dpd2" name="end_date_project[]"  autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Remarks</label>
                                                         <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Project Name"> -->
-                                                        <textarea class="form-control" autocomplete="off" name="remarks"></textarea>
+                                                        <textarea class="form-control"  style="color:black;" required autocomplete="off" name="remarks_project[]"></textarea>
                                                     </div>
                                                     <div class="form-group col-md-1">
                                                         <label for="inputEmail4">Project</label>
@@ -166,7 +182,7 @@
       <script type="text/javascript" charset="utf-8">
           $(document).ready(function() {
               $('#example').dataTable( {
-                  "aaSorting": [[ 0, "desc" ]]
+                  "aaSorting": [[ 0, "asc" ]]
               } );
           } );
       </script>

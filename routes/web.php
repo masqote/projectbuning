@@ -32,3 +32,6 @@ Route::get('/project', 'DashboardController@project'); // Check Profile User
 Route::post('/profileUpdate', 'DashboardController@profileUpdate'); // Update Profile User
 Route::post('/resetPassword', 'DashboardController@resetPassword'); // Update Profile User
 
+//ProjectController
+Route::post('/projectPost', 'ProjectController@projectPost'); // Post project
+

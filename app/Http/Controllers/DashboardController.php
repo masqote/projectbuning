@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Project;
+use App\DetailProject;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use DB;
@@ -33,7 +35,10 @@ class DashboardController extends Controller
             return redirect('login')->with('alert','Kamu harus login dulu');
         }
         else{
-            return view('project');
+            $project = DB::select("
+            SELECT * FROM `projects` ORDER BY month_of_project desc
+            ");
+            return view('project', compact('project'));
         }
     }
 
